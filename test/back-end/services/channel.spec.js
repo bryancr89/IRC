@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
-var channels = require('../../../services/channel');
+var channels = require('../../../services/channels');
 
 describe('Channel Service', function () {
 	it('Should be true', function() {

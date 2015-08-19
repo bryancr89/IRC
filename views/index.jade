@@ -4,6 +4,6 @@ block content
     h1= title
     p Welcome to #{title}
     each channel in channels
-        div(id="#{channel.id}")
+        div(id="#{channel._id}")
             span #{channel.name} -
             span #{channel.description}

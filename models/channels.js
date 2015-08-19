@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var messages = new Schema({
+var channels = new Schema({
     name: String,
     description: String
 });
 
-module.exports = mongoose.model('messages', messages);
+module.exports = mongoose.model('channels', channels);
