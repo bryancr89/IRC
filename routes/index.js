@@ -4,8 +4,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    channelService.getChannels(function(channels) {
-        console.log(channels);
+    channelService.getChannels(function(err, channels) {
+        if(err) {
+            throw err;
+        }
         res.render('index', {title: 'Express', channels: channels});
     });
 });

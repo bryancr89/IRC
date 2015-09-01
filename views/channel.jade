@@ -1,0 +1,18 @@
+extends layout
+block content
+    h1 #{channel.name}
+    section
+        ul#messages
+            each message in channel.messages
+                li
+                    span.date #{message.date}
+                    span.sender #{message.sender}
+                    span.text #{message.text}
+    aside
+        ul#connectedUsers
+
+    section
+        input#addNewMessage(type="text")
+
+    script(src="/scripts/messages.js")
+    script(src="/scripts/socket-channel.js")

@@ -1,9 +1,27 @@
 extends layout
 
 block content
-    h1= title
-    p Welcome to #{title}
-    each channel in channels
-        div(id="#{channel._id}")
-            span #{channel.name} -
-            span #{channel.description}
+
+
+    header.header.clearfix
+        div.container
+            h2.text-muted IRC
+    div.user.form-inline.center
+        div.form-group
+            input.form-control#nickname(placeholder="what's your nickname?")
+        button.btn.btn-primary#setName Set
+    br
+    br
+    form.form#newChannel
+        div.form-group
+            input(name="name", type="text", placeholder="Channel Name")
+        div.form-group
+            input(name="description" , type="text", placeholder="Description")
+        button#addNewChannel Add
+    br
+    br
+    div.channelsContainer
+        each channel in channels
+            a.channelItem(data-channel-id="#{channel._id}", href="/channel/#{channel._id}")
+                span #{channel.name} -
+                span #{channel.description}

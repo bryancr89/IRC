@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
-var users = require('./routes/channel');
+var channel = require('./routes/channel');
 var server = express();
 var environment = require('./config/environment')(server.get('env'));
 
@@ -26,7 +26,7 @@ server.use(cookieParser());
 server.use(express.static(path.join(__dirname, environment.pathPublicFiles)));
 
 server.use('/', routes);
-server.use('/users', users);
+server.use('/channel', channel);
 
 // catch 404 and forward to error handler
 server.use(function (req, res, next) {

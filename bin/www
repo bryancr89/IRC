@@ -36,11 +36,21 @@ server.on('listening', onListening);
  * Handle Real Time Communications using socket.io
  */
 var io = require('socket.io')(server);
-// Register events
-var eventsPath = require("path").join(__dirname, "../events");
-require('fs').readdirSync(eventsPath).forEach(function(file) {
-	require(eventsPath + '/' + file)(io);
+var messageService = require('../services/messages');
+io.sockets.on('connection', function (socket) {
+    socket.on('message', function () { });
+    socket.on('disconnect', function () {
+        console.log('Disconnect from: ', socket.room);
+        socket.leave(socket.room);
+    });
+    // Register events
+    var eventsPath = require("path").join(__dirname, "../events");
+    require('fs').readdirSync(eventsPath).forEach(function(file) {
+        require(eventsPath + '/' + file)(io, socket);
+    });
 });
+
+
 
 
 /**
