@@ -1,6 +1,7 @@
 var express = require('express');
 var channelsService = require('../services/channels');
 var router = express.Router();
+var socket;
 
 /* GET channel. */
 router.get('/', function (req, res, next) {
@@ -21,8 +22,13 @@ router.post('/', function (req, res, next) {
         if (err) {
             throw err;
         }
+        //TODO: Notify for the new channel.
+        //TODO: Send mongodb new channel
         res.send();
     });
 });
 
-module.exports = router;
+module.exports = function(socketIO) {
+    socket = socketIO;
+    return router;
+};

@@ -37,10 +37,10 @@ window.IRC.messages = (function(jQuery) {
     function initializeMessages(socketIO) {
         socket = socketIO;
         initializeEventsListener();
+        initializeAddMessage();
     }
 
     return {
-        initializeAddMessage: initializeAddMessage,
         initializeMessages: initializeMessages,
         sendMessage: sendMessage
     }

@@ -7,10 +7,25 @@ window.IRC.channel = (function(jQuery) {
             method: 'POST',
             url: '/channel',
             data: data,
-            success: function() {
-                console.log('added');
+            // response = {channelId, name, description}
+            success: function(response) {
+                //TODO: Show channel on main page.
+                //TODO: Clean up fields.
             }
-        })
+        });
+    }
+
+    //TODO: Add Initialize listener function.
+    //TODO: Listen for new channels.
+    //TODO: Draw the new channel.
+
+    function initilizeUserName() {
+        jQuery('#setName').click(function() {
+            var nickname = jQuery('#nickname').val().trim();
+            if(nickname) {
+                window.sessionStorage.nickname = nickname;
+            }
+        });
     }
 
     function initializeFormAddChannel() {
@@ -33,6 +48,7 @@ window.IRC.channel = (function(jQuery) {
         socket = socketIO;
         initializeFormAddChannel();
         initializeChannelRedirect();
+        initilizeUserName();
     }
 
     return {
