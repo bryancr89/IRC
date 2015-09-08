@@ -8,7 +8,13 @@ window.IRC.messages = (function(jQuery) {
                 channelId = window.sessionStorage.channelId;
             if (e.keyCode == 13) {
                 var message = jQuery(this).val();
-                IRC.messages.sendMessage({ channelId: channelId, text: message, sender: nickname, date: new Date() });
+                IRC.messages.sendMessage({
+                    channelId: channelId,
+                    text: message,
+                    sender: nickname,
+                    date: new Date()
+                });
+                jQuery(this).val('');
             }
         });
     }

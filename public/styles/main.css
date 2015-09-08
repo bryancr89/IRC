@@ -12,5 +12,44 @@
     border: 1px solid #E5E5E5;
     margin-right: 5px;
     height: 50px;
+    border-radius: 5px;
     display: inline-block;
+}
+
+.channelItem:hover {
+    background-color: #F9F7F7;
+    text-decoration: none;
+}
+
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.addNewChannel {
+    text-align: right;
+}
+
+#newChannel {
+    display: none;
+    border-radius: 5px;
+    width: 225px;
+    padding: 10px 0;
+    border: 1px solid #E5E5E5;
+}
+
+#setName {
+    margin-left: 5px;
+}
+
+#toggleForm {
+    cursor: pointer;
+}
+
+#messages {
+    padding-left: 0;
+}
+
+#messages li {
+    list-style-type: none;
 }

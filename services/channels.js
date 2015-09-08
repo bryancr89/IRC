@@ -22,6 +22,7 @@ function getChannel(id, callback) {
             if(err) {
                 throw err;
             }
+            console.log()
             channel.messages = messages;
             callback(null, channel);
         });

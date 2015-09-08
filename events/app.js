@@ -6,4 +6,9 @@ module.exports = function(io, socket) {
 	io.on('disconnect', function (socket) {
 		//TODO: Do we need to do a clean up?
 	});
+
+    socket.on('channel', function(channel) {
+        console.log('Here', channel);
+        socket.broadcast.emit('channel', channel);
+    })
 };

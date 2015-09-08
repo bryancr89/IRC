@@ -1,12 +1,15 @@
 var messagesModel = require('../models/messages');
 
 function getMessages(channelId, callback) {
-    messagesModel.find({channelId: channelId}, function gotChannels(err, messages) {
-        if(err) {
-            throw err;
-        }
-        callback(null, messages || []);
-    });
+    messagesModel.find({channelId: channelId})
+        .sort({date: -1})
+        .limit(5)
+        .exec(function gotChannels(err, messages) {
+            if (err) {
+                throw err;
+            }
+            callback(null, messages || []);
+        });
 }
 
 function addMessage(message, callback) {

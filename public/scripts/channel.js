@@ -9,10 +9,30 @@ window.IRC.channel = (function(jQuery) {
             data: data,
             // response = {channelId, name, description}
             success: function(response) {
-                //TODO: Show channel on main page.
-                //TODO: Clean up fields.
+                broadCastNewChannel(response);
+                showChannel(response);
             }
         });
+    }
+
+    function broadCastNewChannel(channel) {
+        window.socket.emit('channel', channel);
+    }
+
+    function initializeEventsListener() {
+        window.socket.on('channel', function(newChannel) {
+            showChannel(newChannel);
+        });
+    }
+
+    function showChannel(newChannel) {
+        var html = createChannelHtml(newChannel);
+        jQuery('.channelsContainer').append(html);
+    }
+
+    function createChannelHtml(newchannel) {
+        return '<a class="channelItem" href="/channel/'+ newchannel._id +'" data-channel-id="'+ newchannel._id +'"><span>' + newchannel.name+ '</span><span>'
+            + newchannel.description + '</span></a>'
     }
 
     //TODO: Add Initialize listener function.
@@ -36,10 +56,15 @@ window.IRC.channel = (function(jQuery) {
             var data = jQuery('form#newChannel').serializeArray();
             submitForm(data);
         });
+
+        jQuery('#toggleForm').click(function(e) {
+            e.preventDefault();
+            jQuery('#newChannel').toggle();
+        })
     }
 
     function initializeChannelRedirect() {
-        jQuery(document).on('click', '.channel', function() {
+        jQuery(document).on('click', '.channelItem', function() {
             window.sessionStorage.channelId = jQuery(this).data('channelId');
         });
     }
@@ -47,6 +72,7 @@ window.IRC.channel = (function(jQuery) {
     function initializeChannel(socketIO) {
         socket = socketIO;
         initializeFormAddChannel();
+        initializeEventsListener();
         initializeChannelRedirect();
         initilizeUserName();
     }

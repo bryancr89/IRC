@@ -13,22 +13,19 @@ router.get('/:id', function (req, res, next) {
         if(err) {
             throw err;
         }
+        console.log(channel);
         res.render('channel', {channel: channel});
     });
 });
 
 router.post('/', function (req, res, next) {
-    channelsService.addChannel(req.body, function (err) {
+    channelsService.addChannel(req.body, function (err, channel) {
+
         if (err) {
             throw err;
         }
-        //TODO: Notify for the new channel.
-        //TODO: Send mongodb new channel
-        res.send();
+        res.send(channel);
     });
 });
 
-module.exports = function(socketIO) {
-    socket = socketIO;
-    return router;
-};
+module.exports = router;
